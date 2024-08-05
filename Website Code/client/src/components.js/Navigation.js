@@ -9,6 +9,7 @@ export default function Navigation(){
                     <li className = "Right-Navbar"><Link to ='/login'>Login</Link></li>
                 </ul>
             </nav>
+            <Outlet/>
         </header>
     )
 }
