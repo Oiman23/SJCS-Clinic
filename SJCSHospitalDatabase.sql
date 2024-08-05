@@ -1,0 +1,111 @@
+CREATE TABLE Users(
+	UID INT PRIMARY KEY,
+    FirstName VARCHAR(30),
+    LastName VARCHAR(30),
+    SecurityLevel INT,
+    UserPassword VARCHAR(50),
+    Email VARCHAR(30),
+    PhoneNumber CHAR(10),
+    Gender CHAR(1)
+);
+
+CREATE TABLE MedicalStaff(
+	UID INT PRIMARY KEY,
+    StaffType VARCHAR(20),
+    FOREIGN KEY(UID) REFERENCES Users(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE Patients(
+	UID INT PRIMARY KEY,
+    StreetNum INT,
+    StreetName VARCHAR(30),
+    City VARCHAR(20),
+    State CHAR(2),
+    ZipCode CHAR(5),
+    Income INT,
+    SSN VARCHAR(11),
+    BirthDate DATE,
+    Age INT,
+    FOREIGN KEY(UID) REFERENCES Users(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE MakesAppointment(
+	AID INT,
+    PatientUID INT,
+    AppTime VARCHAR(8),
+    DMY DATE,
+    PRIMARY KEY(AID, PatientUID),
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE HasAppointment(
+	AID INT,
+    PatientUID INT,
+    MedicalUID INT,
+    PRIMARY KEY(AID, PatientUID, MedicalUID),
+    FOREIGN KEY(AID) REFERENCES MakesAppointment(AID) ON DELETE CASCADE,
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
+    FOREIGN KEY(MedicalUID) REFERENCES MedicalStaff(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE TreatmentPlan(
+	TPID INT PRIMARY KEY,
+    TreatmentType VARCHAR(30),
+    PriceDue INT
+);
+
+CREATE TABLE HasTreatmentPlan(
+	TPID INT,
+    PatientUID INT,
+    PRIMARY KEY(TPID, PatientUID),
+    FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE,
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE AssignsTreatmentPlan(
+	TPID INT,
+    MedicalUID INT,
+    PRIMARY KEY(TPID, MedicalUID),
+    FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE,
+    FOREIGN KEY(MedicalUID) REFERENCES MedicalStaff(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE Medicines(
+	MDID INT PRIMARY KEY,
+    MedName VARCHAR(100),
+    Quantities INT,
+    Price INT
+);
+
+CREATE TABLE UsesMedicine(
+	MDID INT,
+    TPID INT,
+    PRIMARY KEY(MDID, TPID),
+    FOREIGN KEY(MDID) REFERENCES Medicines(MDID) ON DELETE CASCADE,
+    FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE
+);
+
+CREATE TABLE Room(
+	RID INT,
+    PatientUID INT,
+    MedicalUID INT,
+    PRIMARY KEY(RID, PatientUID, MedicalUID),
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
+    FOREIGN KEY(MedicalUID) REFERENCES MedicalStaff(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE FinancialData(
+	PatientUID INT PRIMARY KEY,
+    Tax INT,
+    Insurance VARCHAR(30),
+    Benefits VARCHAR(30),
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE
+);
+
+CREATE TABLE Influences(
+	PatientUID INT,
+    TPID INT,
+    PRIMARY KEY(PatientUID, TPID),
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
+    FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE
+);
