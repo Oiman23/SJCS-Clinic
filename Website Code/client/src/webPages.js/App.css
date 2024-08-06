@@ -48,6 +48,6 @@ h.title{
 }
 
 #gradient {
-  height: 800px;
+  height: 99 hv;
   background-image: linear-gradient(rgba(5, 154, 136, 0), rgba(5, 154, 136, 0.4))
 }
