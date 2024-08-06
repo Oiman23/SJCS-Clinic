@@ -15,17 +15,21 @@ const Login = () => {
         })
     }
     return (
-        <div>
-           Test for Login 2012
-            <form onSubmit={handleSubmit}>
-                <label htmlFor= 'username'>Username: </label>
-                <input id = 'username' type='text' value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <label htmlFor= 'username'>Username: </label>
-                <input id = 'password' type='text' value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <div> 
-                    <button type ="submit">Submit </button>
-                </div>
-            </form>
+        <div id="gradient">
+            <center>
+            <h1 className = "title">Login</h1>
+                <form onSubmit={handleSubmit}>
+                    <ul><b>Username</b></ul>
+                    <input id = 'username' type='text' value={username} onChange={(e) => setUsername(e.target.value)} required/>
+                    <br/><br/>
+                    <ul><b>Password</b></ul>
+                    <input id = 'password' type='text' value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    <br/><br/>
+                    <div> 
+                        <button type ="submit"> Login </button>
+                    </div>
+                </form>
+            </center>
         </div>        
     );
 }
