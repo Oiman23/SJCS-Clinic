@@ -33,22 +33,27 @@ const Signup = () => {
                 const response = await axios.post('http://localhost:4000/signup', {
                     username, password, firstname, lastname, email, phonenumber, gender, medicalStaff, patient
                 });
-                console.log(response.data);
-                // Clear form fields
-                setUsername('');
-                setPassword('');
-                setFName('');
-                setLName('');
-                setEmail('');
-                setPNum('');
-                setGender('');
-                setMedicalStaff(false);
-                setPatient(false);
-                // Navigate to home page
-                navigate("/");
+                if (response.data.success) {
+                    console.log(response.data);
+                    // Clear form fields
+                    setUsername('');
+                    setPassword('');
+                    setFName('');
+                    setLName('');
+                    setEmail('');
+                    setPNum('');
+                    setGender('');
+                    setMedicalStaff(false);
+                    setPatient(false);
+                    setErrors({});
+                    // Navigate to home page
+                    navigate("/");
+                } else {
+                    setErrors({ submit: response.data.message });
+                }
             } catch (error) {
                 console.error("Error during signup:", error);
-                setErrors({ submit: "Error during signup. Please try again." });
+                setErrors({ submit: error.response?.data?.message || "Error during signup. Please try again." });
             }
         }
     }
