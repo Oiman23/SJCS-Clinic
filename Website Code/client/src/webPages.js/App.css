@@ -38,16 +38,18 @@ li a:hover{
   background-color: rgb(16, 36, 101);
 }
 
-h.title{
+h1.title{
+  width: 30%;  
   font-size: 325%;
   font-family: Helvetica;
   color:white;
-  background-color: rgb(5, 154, 136);
-  border: 10px solid rgb(5, 154, 136);
+  background-color:violet;
+  border: 10px solid violet;
   border-radius: 3px;
 }
 
 #gradient {
-  height: 99 hv;
+  flex: 1;
+  min-height: 100vh;
   background-image: linear-gradient(rgba(5, 154, 136, 0), rgba(5, 154, 136, 0.4))
 }

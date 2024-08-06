@@ -59,7 +59,7 @@ const Signup = () => {
     }
     return (       
         <div id="gradient">
-            <br/><br/><br/><br/>
+            <br/><br/>
             <center><h1 className="title">Register an Account</h1></center>
             <br/>
             <form onSubmit={handleSubmit}>
