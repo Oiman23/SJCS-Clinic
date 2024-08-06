@@ -43,8 +43,19 @@ h1.title{
   font-size: 325%;
   font-family: Helvetica;
   color:white;
-  background-color:violet;
-  border: 10px solid violet;
+  background-color:crimson;
+  border: 10px solid crimson;
+  border-radius: 3px;
+}
+
+p {
+  padding: auto;
+  width: 20%; 
+  font-size: 125%;
+  font-family: Helvetica;
+  color:white;
+  background-color:crimson;
+  border: 10px solid crimson;
   border-radius: 3px;
 }
 
