@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
 
+app.use(express.json());
 app.use(cors());
 
 const pool = mysql.createPool({
@@ -16,30 +17,40 @@ const pool = mysql.createPool({
     password: 'password',
     database: 'sjcs clinic'
 })
-app.post('/signup', (req,res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-    const email = req.body.email;
-    const phonenumber = req.body.phonenumber;
-    const gender = req.body.gender;
-    const medicalStaff = req.body.medicalStaff ? 1: 0;
-    pool.query("INSERT INTO users (FirstName, LastName, SecurityLevel, UserName, UserPassword, Email, PhoneNumber, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [firstname, lastname, medicalStaff, username, password,  email, phonenumber, gender], (err, result)=>{
-        if (err) {
-            console.log(err);
-        } else {
-            res.send({username: username});
-            res.send({password: password});
-            res.send({firstname: firstname});
-            res.send({lastname:lastname});
-            res.send({email:email});
-            res.send({phonenumber:phonenumber});
-            res.send({gender:gender});
-            res.send({medicalStaff: medicalStaff});
-            
+app.post('/signup', (req, res) => {
+    const {username, password, firstname, lastname, email, phonenumber, gender, medicalStaff} = req.body;
+    const securityLevel = medicalStaff ? 1 : 0;
+
+    pool.query(
+        "INSERT INTO users (FirstName, LastName, SecurityLevel, UserName, UserPassword, Email, PhoneNumber, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [firstname, lastname, securityLevel, username, password, email, phonenumber, gender],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                if (err.code === 'ER_DUP_ENTRY') {
+                    return res.status(409).json({success: false, message: 'Username or email already exists'});
+                }
+                return res.status(500).json({success: false, message: 'Error during signup'});
+            } else {
+                return res.status(201).json({
+                    success: true,
+                    message: 'User created successfully',
+                    user: {username, firstname, lastname, email, phonenumber, gender, securityLevel}
+                });
+            }
         }
-    })  
+    );
+});
+
+app.post('/login', (req,res)=>{
+    pool.query("SELECT * FROM users WHERE UserName = ? AND UserPassword = ?", [req.body.username,req.body.password],
+        (err, results)=>{
+        if(err){ 
+            return res.json("User not found: " + err)
+        }
+        console.log(results);
+        return res.json(results);
+    })
 })
 
 app.listen(4000, () => {
