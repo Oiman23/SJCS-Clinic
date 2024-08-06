@@ -3,6 +3,7 @@ CREATE TABLE Users(
     FirstName VARCHAR(30),
     LastName VARCHAR(30),
     SecurityLevel INT,
+    UserName VARCHAR(50),
     UserPassword VARCHAR(50),
     Email VARCHAR(30),
     PhoneNumber CHAR(10),
