@@ -5,19 +5,26 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost/login', {username})
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        axios.post('http://localhost:4000/login', {username: username, password: password})
+        .then((data)=> {
+            console.log(data);
+            setUsername('');
+            setPassword('');
+        })
     }
     return (
         <div>
-            <text>Test for Login 2012</text>
+           Test for Login 2012
             <form onSubmit={handleSubmit}>
-                <label htmlFor= 'username'>username: </label>
-                <input htmlFor = 'username' placeholder='Enter username' onChange={e => setUsername(e.target.value)}/>
-                <button type ="submit">Submit </button>
+                <label htmlFor= 'username'>Username: </label>
+                <input id = 'username' type='text' value={username} onChange={(e) => setUsername(e.target.value)}/>
+                <label htmlFor= 'username'>Username: </label>
+                <input id = 'password' type='text' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <div> 
+                    <button type ="submit">Submit </button>
+                </div>
             </form>
         </div>        
     );
