@@ -3,7 +3,9 @@ function App() {
   
   return (
     <div className="App">
-      HOMEPAGE Test
+      <div id = "gradient">
+      
+      </div>
     </div>
   )
 }
