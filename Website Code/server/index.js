@@ -16,20 +16,6 @@ const pool = mysql.createPool({
     password: 'password',
     database: 'sjcs clinic'
 })
-// app.post('/login', (req,res) => {
-//     const username = req.body.username;
-//     const password = req.body.password;
-//     pool.query("INSERT INTO users (username, password) VALUES (?, ?)", [username, password], (err, result)=>{
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.send({username: username});
-//             res.send({password: password});
-
-//         }
-//     })
-    
-// })
 app.post('/signup', (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -39,8 +25,6 @@ app.post('/signup', (req,res) => {
     const phonenumber = req.body.phonenumber;
     const gender = req.body.gender;
     const medicalStaff = req.body.medicalStaff ? 1: 0;
-
-
     pool.query("INSERT INTO users (FirstName, LastName, SecurityLevel, UserName, UserPassword, Email, PhoneNumber, Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [firstname, lastname, medicalStaff, username, password,  email, phonenumber, gender], (err, result)=>{
         if (err) {
             console.log(err);
@@ -55,9 +39,9 @@ app.post('/signup', (req,res) => {
             res.send({medicalStaff: medicalStaff});
             
         }
-    })
-    
+    })  
 })
+
 app.listen(4000, () => {
     console.log('server listening on port 4000');
 })
