@@ -34,7 +34,7 @@ app.post('/signup', (req, res) => {
                 return res.status(201).json({
                     success: true,
                     message: 'User created successfully',
-                    user: {username, firstname, lastname, email, phonenumber, gender, medicalStaff: Boolean(securityLevel)}
+                    user: {username, firstname, lastname, email, phonenumber, gender, securityLevel}
                 });
             }
         }

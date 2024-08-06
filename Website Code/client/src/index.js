@@ -5,7 +5,10 @@ import App from './webPages.js/App';
 import Signup from './webPages.js/Signup';
 import Login from './webPages.js/Login';
 import RootLay from './webPages.js/RootLay';
+import PatientInfoFill from './webPages.js/PatientInfoFill';
+import MedicalStaffInfoFill from './webPages.js/MedicalStaffInfoFill';
 import UserProfile from './webPages.js/UserProfile';
+import MedicalStaff from './webPages.js/Medicalstaff';
 
 const router = createBrowserRouter(
 createRoutesFromElements((
@@ -13,7 +16,10 @@ createRoutesFromElements((
     <Route path = '/' element ={<App/>}/> 
     <Route path = '/signup' element = {<Signup/>}/>
     <Route path = '/login' element = {<Login/>}/>
+    <Route path = '/patientinfofill' element = {<PatientInfoFill/>}/>
+    <Route path = '/medicalstaffinfofill' element = {<MedicalStaffInfoFill/>}/>
     <Route path = '/userprofile' element = {<UserProfile/>}/>
+    <Route path = '/medicalstaff' element = {<MedicalStaff/>}/>
  </Route>
  )
 ))
