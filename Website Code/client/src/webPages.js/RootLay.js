@@ -3,9 +3,8 @@ import { Outlet } from "react-router-dom";
 const RootLay = () => {
     return (
         <div>
-            <header><Navigation/></header>
-            <body><Outlet/></body>
-            
+            <Navigation/>
+            <Outlet/>
         </div>        
     );
 }
