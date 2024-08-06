@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Appointments =() =>{
     return (
         <div>
-            Medicalstaff
+            Apointment Page
         </div>
     )
 
