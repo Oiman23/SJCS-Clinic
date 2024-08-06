@@ -43,7 +43,7 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/login', (req,res)=>{
-    pool.query("SELECT * FROM users WHERE UserName = ? AND UserPassword = ?", [username,password],
+    pool.query("SELECT * FROM users WHERE UserName = ? AND UserPassword = ?", [req.body.username,req.body.password],
         (err, results)=>{
         if(err){ 
             return res.json("User not found: " + err)
