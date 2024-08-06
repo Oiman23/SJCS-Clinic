@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [username, setUsername] = useState('')
@@ -26,6 +27,10 @@ const Signup = () => {
             setGender('');
             setMedicalStaff('');
         })
+    }
+    const navigate = useNavigate();
+    function handleClick() {
+        navigate("/");
     }
     return (       
         <div id="gradient">
@@ -64,8 +69,8 @@ const Signup = () => {
                         />
                         Are you a Medical Staff?
                     </label>
-                    <br /><br />
-                    <button type="submit">Sign Up</button>
+                    <br/><br/>
+                    <button type="submit" onClick={handleClick}>Sign Up</button>
                 </center>
             </form>
         </div>        
