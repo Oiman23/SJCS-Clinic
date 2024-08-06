@@ -33,7 +33,7 @@ const Signup = () => {
     return (
         <html>
             <div id="gradient">
-                <br></br><br></br><br></br><br></br>
+                <br/><br/><br/><br/><br/><br/>
                 <center><h class="title">Register an Account</h></center>
                 <br></br>
                 <form onSubmit={handleSubmit}>
