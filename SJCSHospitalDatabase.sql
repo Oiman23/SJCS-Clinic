@@ -1,12 +1,12 @@
 CREATE TABLE Users(
-    UID INT PRIMARY KEY,
+    UID INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR(30),
     LastName VARCHAR(30),
     SecurityLevel INT,
     UserName VARCHAR(50),
     UserPassword VARCHAR(50),
     Email VARCHAR(30),
-    PhoneNumber CHAR(10),
+    PhoneNumber CHAR(12),
     Gender CHAR(1)
 );
 
