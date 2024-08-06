@@ -1,0 +1,13 @@
+DROP TABLE HasTreatmentPlan;
+DROP TABLE AssignsTreatmentPlan;
+DROP TABLE UsesMedicine;
+DROP TABLE Room;
+DROP TABLE FinancialData;
+DROP TABLE Influences;
+DROP TABLE HasAppointment;
+DROP TABLE MedicalStaff;
+DROP TABLE MakesAppointment;
+DROP TABLE Patients;
+DROP TABLE TreatmentPlan;
+DROP TABLE Medicines;
+DROP TABLE Users;
