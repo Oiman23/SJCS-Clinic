@@ -10,6 +10,10 @@
 &emsp;&emsp; SJCS-Clinic is a simulated hospital website mimicing some basic functions necessary for a real hospital. Any name, place, information, or data used in this project is all fabricated and fictional for the educational purposes of setting up a fullstack project that utilizes MYSQL. 
 
 # Setup
+1. Download/ Clone repository
+2. (SQL STEP)
+3. Open command prompt and go to the directory Client inside of the files and type 'npm install', go to the Server directory and also do an 'npm install'
+4. Go back to the Client directory and do 'npm start run' then, on a new tab of the command prompt (so there is now two running) go to the Server directory and tpye in 'node index.js'
 
 # Division Of Work
 ER Diagram, Relational Model, MySQL Database code: **Joshua** and **Jerry**
