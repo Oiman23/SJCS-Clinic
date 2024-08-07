@@ -19,7 +19,7 @@ const PatientInfoFill = () => {
     useEffect(() => {
         const storedUserId = localStorage.getItem('userId');
         if (!storedUserId) {
-            navigate('/userprofile'); // Redirect to login if no user ID is found
+            navigate('/login'); // Redirect to login if no user ID is found
         } else {
             setUserId(storedUserId);
         }

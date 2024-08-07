@@ -85,7 +85,6 @@ app.get('/user/:id', (req, res) => {
         }
     );
 });
-
 app.post('/login', (req, res) => {
     console.log('Login attempt:', req.body);  // Log the incoming request
 
@@ -120,7 +119,28 @@ app.post('/login', (req, res) => {
         }
     );
 });
-
+app.post('/verification', (req, res)=>{
+    pool.query("SELECT Verification, TypeName FROM MedicalType WHERE Verification = ?", [req.body.verification],
+    (err, results) =>{
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+        console.log('Query results:', results);  // Log the query results
+        if (results.length > 0) {
+            const types = results[0];
+            console.log(results);
+            return res.json({
+                success: true,
+                message: 'Valid Verification Code: Accress Granted',
+                MedicalType: types.TypeName
+            });
+        } else {
+            return res.json({ success: false, message: 'Invalid Verification Code: Access Denied' });
+        }  
+    }    
+    )
+})
 app.listen(4000, () => {
     console.log('server listening on port 4000');
 })

@@ -110,7 +110,24 @@ CREATE TABLE Influences(
     FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
     FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE
 );
+CREATE TABLE medicalHistory(
+    MHID INT,
+	PatientUID INT,
+    MedicalUID INT,
+    PRIMARY KEY(MHID, PatientUID),
+    FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
+    FOREIGN KEY(MedicalUID) REFERENCES MedicalStaff(UID) ON DELETE CASCADE
+);
+CREATE TABLE MedicalType(
+	Verification INT PRIMARY KEY,
+    TypeName VARCHAR(50)
+);
 -- Populate with data
+INSERT INTO MedicalType VALUES 
+	(157,"Nurse"),
+    (151, "Doctor"),
+    (147, "Surgeon");
+
 INSERT INTO users (FirstName, LastName, SecurityLevel, UserName, UserPassword, Email, PhoneNumber, Gender) VALUES 
 ('Josh','T',3,'Oiman','password','Example@gmail.com','408-111-2020','M'),
 ('Joe', 'Smith', 0, 'JoeSmith', 'TestingPasswordEx', 'JoeSmith@gmail.com', '408-554-8293', 'M'),
