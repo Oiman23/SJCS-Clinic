@@ -9,6 +9,7 @@ import PatientInfoFill from './webPages.js/PatientInfoFill';
 import MedicalStaffInfoFill from './webPages.js/MedicalStaffInfoFill';
 import UserProfile from './webPages.js/UserProfile';
 import MedicalStaff from './webPages.js/Medicalstaff';
+import Appointments from './webPages.js/Appointments';
 
 const router = createBrowserRouter(
 createRoutesFromElements((
@@ -20,6 +21,7 @@ createRoutesFromElements((
     <Route path = '/medicalstaffinfofill' element = {<MedicalStaffInfoFill/>}/>
     <Route path = '/userprofile' element = {<UserProfile/>}/>
     <Route path = '/medicalstaff' element = {<MedicalStaff/>}/>
+    <Route path = '/appointments' element = {<Appointments/>}/>
  </Route>
  )
 ))
