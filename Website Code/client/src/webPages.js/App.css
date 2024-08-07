@@ -82,3 +82,19 @@ p.descript {
 .back-to-top:hover {
   background: rgba(5, 154, 136, 1);
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 5px solid crimson;
+}
+
+th, td {
+  text-align: left;
+  padding: 30px;
+}
+
+th {
+  background-color: crimson;
+  color: white;
+}
