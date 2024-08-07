@@ -36,17 +36,18 @@ const Signup = () => {
         if (validateForm()) {
             try {
                 const response = await axios.post('http://localhost:4000/signup', {
-                    username, 
-                    password, 
-                    firstname, 
-                    lastname, 
-                    email, 
-                    phonenumber, 
-                    gender, 
+                    username,
+                    password,
+                    firstname,
+                    lastname,
+                    email,
+                    phonenumber,
+                    gender,
                     medicalStaff: userType === 'medicalStaff'
                 });
                 if (response.data.success) {
                     console.log(response.data);
+                    localStorage.setItem('userId', response.data.user.UID);
                     // Clear form fields
                     setUsername('');
                     setPassword('');
@@ -56,7 +57,7 @@ const Signup = () => {
                     setPNum('');
                     setGender('');
                     setErrors({});
-                    
+
                     // Navigate based on user type
                     if (userType === 'medicalStaff') {
                         navigate("/medicalstaffinfofill");
@@ -106,30 +107,37 @@ const Signup = () => {
                     <input type="text" style={{ width: '175px' }} placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
                     {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
                     <br /><br />
+
                     <ul><b>Password</b></ul>
                     <input type="password" style={{ width: '175px' }} placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                     {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                     <br /><br />
+
                     <ul><b>First Name</b></ul>
                     <input type="text" style={{ width: '175px' }} placeholder="Enter your First Name" value={firstname} onChange={(e) => setFName(e.target.value)} required />
                     {errors.firstname && <p style={{ color: 'red' }}>{errors.firstname}</p>}
                     <br /><br />
+
                     <ul><b>Last Name</b></ul>
                     <input type="text" style={{ width: '175px' }} placeholder="Enter your Last Name" value={lastname} onChange={(e) => setLName(e.target.value)} required />
                     {errors.lastname && <p style={{ color: 'red' }}>{errors.lastname}</p>}
                     <br /><br />
+
                     <ul><b>Email</b></ul>
                     <input type="email" style={{ width: '175px' }} placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                     <br /><br />
+
                     <ul><b>Phone Number</b></ul>
                     <input type="pNum" placeholder="Ex.(123-456-7890)" value={phonenumber} onChange={(e) => setPNum(e.target.value)} required />
                     {errors.phonenumber && <p style={{ color: 'red' }}>{errors.phonenumber}</p>}
                     <br /><br />
+
                     <ul><b>Gender</b></ul>
                     <input type="text" placeholder="Enter Gender(M or F)" value={gender} onChange={(e) => setGender(e.target.value)} required />
                     {errors.gender && <p style={{ color: 'red' }}>{errors.gender}</p>}
                     <br /><br />
+
                     <button type="submit">Sign Up</button>
                     {errors.submit && <p style={{ color: 'red' }}>{errors.submit}</p>}
                     <br /><br /><br /><br />

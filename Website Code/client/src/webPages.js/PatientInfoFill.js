@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const PatientInfoFill =() =>{
+const PatientInfoFill = () => {
     const [streetnum, setStreetNum] = useState('');
     const [streetname, setStreetName] = useState('');
     const [city, setCity] = useState('');
@@ -14,6 +14,16 @@ const PatientInfoFill =() =>{
     const [age, setAge] = useState('');
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const storedUserId = localStorage.getItem('userId');
+        if (!storedUserId) {
+            navigate('/userprofile'); // Redirect to login if no user ID is found
+        } else {
+            setUserId(storedUserId);
+        }
+    }, [navigate]);
 
     const validateForm = () => {
         let tempErrors = {};
@@ -33,8 +43,13 @@ const PatientInfoFill =() =>{
     const handleSubmit = async e => {
         e.preventDefault();
         if (validateForm()) {
+            if (!userId) {
+                setErrors({ submit: "User not logged in. Please log in and try again." });
+                return;
+            }
             try {
                 const response = await axios.post('http://localhost:4000/patientinfofill', {
+                    userId, // Include the user ID in the request
                     streetnum,
                     streetname,
                     city,
@@ -58,9 +73,9 @@ const PatientInfoFill =() =>{
                     setBirthdate('');
                     setAge('');
                     setErrors({});
-                    
+
                     // Navigate to the user profile
-                    navigate("/userprofile"); 
+                    navigate("/userprofile");
                 } else {
                     setErrors({ submit: response.data.message });
                 }
@@ -70,63 +85,63 @@ const PatientInfoFill =() =>{
             }
         }
     }
-    
+
     return (
         <div id="gradient">
-    <center><h1 className="title">Patient Information</h1></center>
-    <form onSubmit={handleSubmit}>
-        <center>
-            <ul><b>Street Number</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter Street Number" value={streetnum} onChange={(e) => setStreetNum(e.target.value)} required />
-            {errors.streetnum && <p style={{ color: 'red' }}>{errors.streetnum}</p>}
-            <br /><br />
+            <center><h1 className="title">Patient Information</h1></center>
+            <form onSubmit={handleSubmit}>
+                <center>
+                    <ul><b>Street Number</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter Street Number" value={streetnum} onChange={(e) => setStreetNum(e.target.value)} required />
+                    {errors.streetnum && <p style={{ color: 'red' }}>{errors.streetnum}</p>}
+                    <br /><br />
 
-            <ul><b>Street Name</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter Street Name" value={streetname} onChange={(e) => setStreetName(e.target.value)} required />
-            {errors.streetname && <p style={{ color: 'red' }}>{errors.streetname}</p>}
-            <br /><br />
+                    <ul><b>Street Name</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter Street Name" value={streetname} onChange={(e) => setStreetName(e.target.value)} required />
+                    {errors.streetname && <p style={{ color: 'red' }}>{errors.streetname}</p>}
+                    <br /><br />
 
-            <ul><b>City</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter City" value={city} onChange={(e) => setCity(e.target.value)} required />
-            {errors.city && <p style={{ color: 'red' }}>{errors.city}</p>}
-            <br /><br />
+                    <ul><b>City</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter City" value={city} onChange={(e) => setCity(e.target.value)} required />
+                    {errors.city && <p style={{ color: 'red' }}>{errors.city}</p>}
+                    <br /><br />
 
-            <ul><b>State</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter State (2-letter code)" value={state} onChange={(e) => setState(e.target.value)} required />
-            {errors.state && <p style={{ color: 'red' }}>{errors.state}</p>}
-            <br /><br />
+                    <ul><b>State</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter State (2-letter code)" value={state} onChange={(e) => setState(e.target.value)} required />
+                    {errors.state && <p style={{ color: 'red' }}>{errors.state}</p>}
+                    <br /><br />
 
-            <ul><b>Zipcode</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter Zipcode (12345)" value={zipcode} onChange={(e) => setZipcode(e.target.value)} required />
-            {errors.zipcode && <p style={{ color: 'red' }}>{errors.zipcode}</p>}
-            <br /><br />
+                    <ul><b>Zipcode</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter Zipcode (12345)" value={zipcode} onChange={(e) => setZipcode(e.target.value)} required />
+                    {errors.zipcode && <p style={{ color: 'red' }}>{errors.zipcode}</p>}
+                    <br /><br />
 
-            <ul><b>Income</b></ul>
-            <input type="number" style={{ width: '175px' }} placeholder="Enter Annual Income" value={income} onChange={(e) => setIncome(e.target.value)} required />
-            {errors.income && <p style={{ color: 'red' }}>{errors.income}</p>}
-            <br /><br />
+                    <ul><b>Income</b></ul>
+                    <input type="number" style={{ width: '175px' }} placeholder="Enter Annual Income" value={income} onChange={(e) => setIncome(e.target.value)} required />
+                    {errors.income && <p style={{ color: 'red' }}>{errors.income}</p>}
+                    <br /><br />
 
-            <ul><b>SSN</b></ul>
-            <input type="text" style={{ width: '175px' }} placeholder="Enter SSN (123-45-6789)" value={ssn} onChange={(e) => setSSN(e.target.value)} required />
-            {errors.ssn && <p style={{ color: 'red' }}>{errors.ssn}</p>}
-            <br /><br />
+                    <ul><b>SSN</b></ul>
+                    <input type="text" style={{ width: '175px' }} placeholder="Enter SSN (123-45-6789)" value={ssn} onChange={(e) => setSSN(e.target.value)} required />
+                    {errors.ssn && <p style={{ color: 'red' }}>{errors.ssn}</p>}
+                    <br /><br />
 
-            <ul><b>Birthdate</b></ul>
-            <input type="date" style={{ width: '175px' }} value={birthdate} onChange={(e) => setBirthdate(e.target.value)} required />
-            {errors.birthdate && <p style={{ color: 'red' }}>{errors.birthdate}</p>}
-            <br /><br />
+                    <ul><b>Birthdate</b></ul>
+                    <input type="date" style={{ width: '175px' }} value={birthdate} onChange={(e) => setBirthdate(e.target.value)} required />
+                    {errors.birthdate && <p style={{ color: 'red' }}>{errors.birthdate}</p>}
+                    <br /><br />
 
-            <ul><b>Age</b></ul>
-            <input type="number" style={{ width: '175px' }} placeholder="Enter Age" value={age} onChange={(e) => setAge(e.target.value)} required />
-            {errors.age && <p style={{ color: 'red' }}>{errors.age}</p>}
-            <br /><br />
+                    <ul><b>Age</b></ul>
+                    <input type="number" style={{ width: '175px' }} placeholder="Enter Age" value={age} onChange={(e) => setAge(e.target.value)} required />
+                    {errors.age && <p style={{ color: 'red' }}>{errors.age}</p>}
+                    <br /><br />
 
-            <button type="submit">Submit Patient Information</button>
-            {errors.submit && <p style={{ color: 'red' }}>{errors.submit}</p>}
-            <br /><br /><br /><br />
-        </center>
-    </form>
-</div>
+                    <button type="submit">Submit Patient Information</button>
+                    {errors.submit && <p style={{ color: 'red' }}>{errors.submit}</p>}
+                    <br /><br /><br /><br />
+                </center>
+            </form>
+        </div>
     )
 
 }
