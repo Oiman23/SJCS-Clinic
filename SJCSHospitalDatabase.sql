@@ -110,6 +110,7 @@ CREATE TABLE Influences(
     FOREIGN KEY(PatientUID) REFERENCES Patients(UID) ON DELETE CASCADE,
     FOREIGN KEY(TPID) REFERENCES TreatmentPlan(TPID) ON DELETE CASCADE
 );
+
 CREATE TABLE medicalHistory(
     MHID INT,
 	PatientUID INT,
@@ -122,6 +123,7 @@ CREATE TABLE MedicalType(
 	Verification INT PRIMARY KEY,
     TypeName VARCHAR(50)
 );
+
 -- Populate with data
 INSERT INTO MedicalType VALUES 
 	(157,"Nurse"),
@@ -129,13 +131,15 @@ INSERT INTO MedicalType VALUES
     (147, "Surgeon");
 
 INSERT INTO users (FirstName, LastName, SecurityLevel, UserName, UserPassword, Email, PhoneNumber, Gender) VALUES 
-('Josh','T',3,'Oiman','password','Example@gmail.com','408-111-2020','M'),
+('Josh','T',0,'Oiman','password','Example@gmail.com','408-111-2020','M'),
 ('Joe', 'Smith', 0, 'JoeSmith', 'TestingPasswordEx', 'JoeSmith@gmail.com', '408-554-8293', 'M'),
-('Alice', 'Johnson', 1, 'AliceJohnson', 'AlicePass2024', 'AliceJohnson@gmail.com', '408-123-4567', 'F'),
-('Bob', 'Williams', 2, 'BobWilliams', 'BobPass4567', 'BobWilliams@gmail.com', '408-234-5678', 'M'),
+('Alice', 'Johnson', 0, 'AliceJohnson', 'AlicePass2024', 'AliceJohnson@gmail.com', '408-123-4567', 'F'),
+('Bob', 'Williams', 0, 'BobWilliams', 'BobPass4567', 'BobWilliams@gmail.com', '408-234-5678', 'M'),
 ('Carol', 'Davis', 0, 'CarolDavis', 'CarolD123!', 'CarolDavis@yahoo.com', '408-345-6789', 'F'),
-('David', 'Miller', 3, 'DavidMiller', 'DavidM2024$', 'DavidMiller@yahoo.com', '408-456-7890', 'M'),
-('Emma', 'Taylor', 1, 'EmmaTaylor', 'EmmaT2024!', 'EmmaTaylor@yahoo.com', '408-567-8901', 'F');
+('David', 'Miller', 0, 'DavidMiller', 'DavidM2024$', 'DavidMiller@yahoo.com', '408-456-7890', 'M'),
+('Emma', 'Taylor', 1, 'EmmaTaylor', 'EmmaT2024!', 'EmmaTaylor@yahoo.com', '408-567-8901', 'F'),
+('Billy', 'Mills', 1, 'BillyMills', 'BM!', 'BillyMills@yahoo.com', '408-542-1112', 'M'),
+('Shaun', 'Murphy', 1, 'ShaunMurphy', 'SM64', 'ShuanMurphy@gmail.com', '408-044-9912', 'M');
 
 INSERT INTO Patients (UID, StreetNum, StreetName, City, State, ZipCode, Income, SSN, Birthdate, Age) VALUES 
 (1, '82', 'Ranch', 'San Jose', 'CA', '92202', '10000', '333-22-4122', '2000-01-01', '24'),
@@ -144,3 +148,66 @@ INSERT INTO Patients (UID, StreetNum, StreetName, City, State, ZipCode, Income, 
 (4, '789', 'Pine Rd', 'Sacramento', 'CA', '95814', '62000', '666-77-8888', '1990-11-30', '33'),
 (5, '101', 'Elm Blvd', 'San Diego', 'CA', '92101', '43000', '777-88-9999', '1983-05-05', '41'),
 (6, '202', 'Cedar Ln', 'Fresno', 'CA', '93701', '52000', '888-99-0000', '1987-09-09', '36');
+
+INSERT INTO MedicalStaff (UID, StaffType) VALUES
+(7, 'Nurse'),
+(8, 'Doctor'),
+(9, 'Surgeon');
+
+INSERT INTO MakesAppointment (AID, PatientUID, AppTime, DMY) VALUES
+(1, 1, '11:00', '2024-08-10'),
+(2, 4, '9:00', '2024-09-26'),
+(3, 6, '8:00', '2024-08-30');
+
+INSERT INTO HasAppointment (AID, PatientUID, MedicalUID) VALUES
+(1, 1, 7),
+(2, 4, 9),
+(3, 6, 8);
+
+INSERT INTO TreatmentPlan(TPID, TreatmentType, PriceDue) VALUES
+(1, 'Fever', 150),
+(2, 'Brain Surgery', 50000),
+(3, 'Pneumonia', 300);
+
+INSERT INTO HasTreatmentPlan(TPID, PatientUID) VALUES
+(1, 6),
+(2, 4),
+(3, 1);
+
+INSERT INTO AssignsTreatmentPlan(TPID, MedicalUID) VALUES
+(1, 8),
+(2, 9),
+(3, 7);
+
+INSERT INTO Medicines(MDID, MedName, Quantities, Price) VALUES
+(1, 'Ibuprofen', 10000, 2),
+(2, 'Tylenol', 5000, 5),
+(3, 'Xanax', 500, 10);
+
+INSERT INTO UsesMedicine(MDID, TPID) VALUES
+(1, 2),
+(2, 3),
+(3, 1);
+
+INSERT INTO Room(RID, PatientUID, MedicalUID) VALUES
+(1, 6, 8),
+(2, 4, 9),
+(3, 1, 7);
+
+INSERT INTO Influences(PatientUID, TPID) VALUES 
+(6, 1),
+(4, 2),
+(1, 3);
+
+INSERT INTO medicalHistory (MHID, PatientUID, MedicalUID) VALUES
+(1, 1, 7), 
+(2, 1, 8), 
+(3, 4, 9), 
+(4, 6, 8), 
+(5, 2, 7), 
+(6, 3, 9); 
+
+INSERT INTO MedicalType (Verification, TypeName) VALUES
+(1, 'Nurse'),
+(2, 'Doctor'),
+(3, 'Surgeon');
