@@ -11,9 +11,20 @@
 
 # Setup
 1. Download/ Clone repository
-2. (SQL STEP)
-3. Open command prompt and go to the directory Client inside of the files and type 'npm install', go to the Server directory and also do an 'npm install'
-4. Go back to the Client directory and do 'npm start run' then, on a new tab of the command prompt (so there is now two running) go to the Server directory and tpye in 'node index.js'
+2. Requires MySQL Workbench
+  - Create connection and have these settings: host = 'localhost', user = 'root', password = 'password'
+  - Create a schema called 'sjcs clinic'
+  - run SJCSHOSPITALDatabase.sql on the schema
+4. Requires Node.js:
+  - Open command prompt and go to the directory Client (cd) and enter 'npm install'
+  - Go to the Server directory in command prompt and also do an 'npm install'
+5. Go back to the Client directory and do 'npm start run' then, on a new tab of the command prompt (so there is now two running) go to the Server directory and tpye in 'node index.js'
 
 # Division Of Work
 ER Diagram, Relational Model, MySQL Database code: **Joshua** and **Jerry**
+MedicalStaffInfo: Joshua
+PatientStaffInfo: Jerry
+Signup: Jerry
+Login: Jerry and Joshua
+Client Index: Jerry and Joshua
+Server Index: Joshua and Jerry 
