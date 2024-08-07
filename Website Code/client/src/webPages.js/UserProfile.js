@@ -9,7 +9,7 @@ const UserProfile = () => {
         const fetchUserData = async () => {
             const userId = localStorage.getItem('userId');
             if (!userId) {
-                navigate('/login');
+                navigate('/userprofile');
                 return;
             }
 
@@ -18,7 +18,7 @@ const UserProfile = () => {
                 setUserData(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                navigate('/login');
+                navigate('/userprofile');
             }
         };
 

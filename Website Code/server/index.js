@@ -87,15 +87,39 @@ app.get('/user/:id', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-    pool.query("SELECT * FROM users WHERE UserName = ? AND UserPassword = ?", [req.body.username, req.body.password],
+    console.log('Login attempt:', req.body);  // Log the incoming request
+
+    pool.query(
+        "SELECT * FROM users WHERE UserName = ? AND UserPassword = ?",
+        [req.body.username, req.body.password],
         (err, results) => {
             if (err) {
-                return res.json("User not found: " + err)
+                console.error('Database error:', err);
+                return res.status(500).json({ success: false, message: 'Server error' });
             }
-            console.log(results);
-            return res.json(results);
-        })
-})
+            console.log('Query results:', results);  // Log the query results
+            if (results.length > 0) {
+                const user = results[0];
+                return res.json({
+                    success: true,
+                    message: 'Login successful',
+                    user: {
+                        UID: user.UID,
+                        UserName: user.UserName,
+                        FirstName: user.FirstName,
+                        LastName: user.LastName,
+                        Email: user.Email,
+                        PhoneNumber: user.PhoneNumber,
+                        Gender: user.Gender,
+                        SecurityLevel: user.SecurityLevel
+                    }
+                });
+            } else {
+                return res.json({ success: false, message: 'Invalid username or password' });
+            }
+        }
+    );
+});
 
 app.listen(4000, () => {
     console.log('server listening on port 4000');
