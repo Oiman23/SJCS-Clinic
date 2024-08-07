@@ -21,10 +21,10 @@
 5. Go back to the Client directory and do 'npm start run' then, on a new tab of the command prompt (so there is now two running) go to the Server directory and tpye in 'node index.js'
 
 # Division Of Work
-ER Diagram, Relational Model, MySQL Database code: **Joshua** and **Jerry**
-MedicalStaffInfo: Joshua
-PatientStaffInfo: Jerry
-Signup: Jerry
-Login: Jerry and Joshua
-Client Index: Jerry and Joshua
-Server Index: Joshua and Jerry 
+ER Diagram, Relational Model, MySQL Database code: Joshua and Jerry <br/>
+MedicalStaffInfo: Joshua <br/>
+PatientStaffInfo: Jerry<br/>
+Signup: Jerry<br/>
+Login: Jerry and Joshua<br/>
+Client Index: Jerry and Joshua<br/>
+Server Index: Joshua and Jerry <br/>
