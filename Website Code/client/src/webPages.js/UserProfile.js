@@ -30,6 +30,10 @@ const UserProfile = () => {
         navigate('/');
     };
 
+    const handleAppointments = () => {
+        navigate('/appointments');
+    };
+
     if (!userData) {
         return <div>Loading...</div>;
     }
@@ -67,6 +71,7 @@ const UserProfile = () => {
                     </tr>
                 </tbody>
             </table>
+            <button onClick={handleAppointments} className="appointment">Make an Appointment</button>
         </div>
     );
 }
