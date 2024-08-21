@@ -17,6 +17,7 @@ const Appointments =() =>{
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Profile</th>
                     </tr>
                 </thead>
             </table>
