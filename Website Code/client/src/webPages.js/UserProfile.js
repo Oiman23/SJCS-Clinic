@@ -42,7 +42,7 @@ const UserProfile = () => {
         <div id="gradient">
             <br/> 
             <button onClick={handleLogout} type="button">Click to Log Out</button>
-            <br/><br/><br/>
+            <center><h1 className="title">{userData.FirstName}'s Profile</h1></center>
             <table>
                 <thead>
                     <tr>
